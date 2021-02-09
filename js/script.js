@@ -13,6 +13,9 @@
 //   - Voto
 
 new Vue({
-
+    el: '#root',
+    data: {
+        
+    }
 });
 Vue.config.devtools=true
