@@ -9,9 +9,31 @@
     <title>BOOLFLIX</title>
 </head>
 <body>
-    <div id="root">
+
+    <div class="container">
+
+        <div id="root">
+
+            <div class="search">
+                <input type="text" class="user-input" placeholder="Search by title" v-model="userSearch" @keyup.enter="clickSearch"><br>
+                <button class="search-button" @click="clickSearch">SEARCH</button>
+            </div>
+
+            <div class="filtered-search-container">
+
+                <div class="filtered-search" v-for="element in movies">
+                    <p>Title: {{element.title}}</p>
+                    <p>Original title: {{element.original_title}}</p>
+                    <p>Lenguage: {{element.original_language}}</p>
+                    <p>Vote: {{element.vote_average}}</p>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
+
     <script src="js/script.js"></script>
 </body>
 </html>

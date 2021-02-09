@@ -15,7 +15,17 @@
 new Vue({
     el: '#root',
     data: {
-        
+        userSearch: '',
+        movies: []
+    },
+    methods: {
+        clickSearch: function(){
+            const self=this;
+            axios.get('https://api.themoviedb.org/3/search/movie?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=' + this.userSearch)
+            .then(function(resp){
+                self.movies=resp.data.results;
+            })
+        }
     }
 });
 Vue.config.devtools=true
