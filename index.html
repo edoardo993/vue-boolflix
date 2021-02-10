@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <title>BOOLFLIX</title>
@@ -22,10 +23,27 @@
             <div class="filtered-search-container">
 
                 <div class="filtered-search" v-for="element in movies">
-                    <p>Title: {{element.title}}</p>
-                    <p>Original title: {{element.original_title}}</p>
-                    <p>Lenguage: {{element.original_language}}</p>
-                    <p>Vote: {{element.vote_average}}</p>
+
+                    <div class="movie-info">
+                        <span class="info-title">Title: </span>
+                        <span>{{element.title}}</span>
+                    </div>
+
+                    <div class="movie-info">
+                        <span class="info-title">Original title: </span>
+                        <span>{{element.original_title}}</span>
+                    </div>
+
+                    <div class="movie-info">
+                        <span class="info-title">Lenguage: </span>
+                        <span>{{element.original_language}}</span>
+                    </div>
+                    
+                    <div class="movie-info">
+                        <span class="info-title">Vote: </span>
+                        <span>{{element.vote_average}}</span>
+                    </div>
+
                 </div>
 
             </div>

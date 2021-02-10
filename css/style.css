@@ -42,14 +42,19 @@ body{
     flex-wrap: wrap
 }
 .filtered-search{
-    border: 1px solid #fff;
+    border: 1px solid #ccc;
     width: 300px;
     min-height: 300px;
     margin-top: 40px;
     color: #fff;
     padding: 20px
 }
-.filtered-search p{
-    font-size: 18px;
-    margin-bottom: 7px
+.movie-info{
+    margin-bottom: 10px
+}
+.movie-info span{
+    font-size: 16px
+}
+.info-title{
+    font-weight: bold;
 }
