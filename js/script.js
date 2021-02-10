@@ -13,21 +13,19 @@
 //   - Voto
 
 // Milestone 2:
-// Trasformiamo il voto da 1 a 10 decimale in un numero
-// intero da 1 a 5, così da permetterci di stampare a schermo
-// un numero di stelle piene che vanno da 1 a 5, lasciando
-// le restanti vuote (troviamo le icone in FontAwesome).
-// Arrotondiamo sempre per eccesso all’unità successiva,
-// non gestiamo icone mezze piene (o mezze vuote :P)
-// Trasformiamo poi la stringa statica della lingua in una vera
-// e propria bandiera della nazione corrispondente, gestendo
-// il caso in cui non abbiamo la bandiera della nazione
-// ritornata dall’API (le flag non ci sono in FontAwesome).
-
-// Allarghiamo poi la ricerca anche alle serie tv.
-// Con la stessa azione di ricerca dovremo prendere
-// sia i film che corrispondono alla query, sia le serie tv,
-// stando attenti ad avere alla fine dei valori simili
+// 1 - Trasformiamo il voto da 1 a 10 decimale in un numero
+//      intero da 1 a 5, così da permetterci di stampare
+//      a schermo un numero di stelle piene che vanno da 1 a 5,
+//      lasciando le restanti vuote.
+//      Arrotondiamo sempre per eccesso all’unità successiva
+// 2 - Trasformiamo poi la stringa statica della lingua in una
+//       vera e propria bandiera della nazione corrispondente,
+//       gestendo il caso in cui non abbiamo la bandiera
+//       della nazione ritornata dall’API
+// 3 - Allarghiamo poi la ricerca anche alle serie tv.
+//      Con la stessa azione di ricerca dovremo prendere
+//      sia i film che corrispondono alla query, sia le serie tv,
+//      stando attenti ad avere alla fine dei valori simili
 
 
 new Vue({
@@ -46,10 +44,19 @@ new Vue({
                     if(element.vote_average%1!==0){
                         element.vote_average=Math.ceil(element.vote_average/2)
                     }else{
-                        element.vote_average=element.vote_average/2
+                        element.vote_average=Math.round(element.vote_average/2)
                     }
                 })
             })
+        },
+        flagIcon: function(element){
+            if(element.original_language==='en'){
+                element.original_language='gb'
+            }
+            if(element.original_language==='ja'){
+                element.original_language='jp'
+            }
+            return 'https://lipis.github.io/flag-icon-css/flags/4x3/'+ element.original_language +'.svg';
         }
     }
 });

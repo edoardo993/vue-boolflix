@@ -27,6 +27,7 @@
                     <div class="movie-info">
                         <span class="info-title">Title: </span>
                         <span>{{element.title}}</span>
+                        <span>{{element.name}}</span>
                     </div>
 
                     <div class="movie-info">
@@ -35,8 +36,8 @@
                     </div>
 
                     <div class="movie-info">
-                        <span class="info-title">Lenguage: </span>
-                        <span>{{element.original_language}}</span>
+                        <span class="info-title">Language: </span>
+                        <img class="flag-icon" :src="flagIcon(element)" alt="">
                     </div>
                     
                     <div class="movie-info">

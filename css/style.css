@@ -58,3 +58,7 @@ body{
 .info-title{
     font-weight: bold;
 }
+.flag-icon{
+    width: 20px;
+    vertical-align: middle;
+}
