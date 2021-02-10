@@ -32,7 +32,8 @@ new Vue({
     el: '#root',
     data: {
         userSearch: '',
-        movies: []
+        movies: [],
+        series: []
     },
     methods: {
         clickSearch: function(){
@@ -41,13 +42,16 @@ new Vue({
             .then(function(resp){
                 self.movies=resp.data.results;
                 self.movies.forEach((element)=>{
-                    if(element.vote_average%1!==0){
-                        element.vote_average=Math.ceil(element.vote_average/2)
-                    }else{
-                        element.vote_average=Math.round(element.vote_average/2)
-                    }
+                    return element.vote_average=Math.ceil(element.vote_average/2)
                 })
-            })
+            });
+            axios.get('https://api.themoviedb.org/3/search/tv?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=' + this.userSearch)
+            .then(function(resp){
+                self.series=resp.data.results;
+                self.series.forEach((element)=>{
+                    return element.vote_average=Math.ceil(element.vote_average/2)
+                })
+            });
         },
         flagIcon: function(element){
             if(element.original_language==='en'){

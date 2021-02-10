@@ -27,7 +27,6 @@
                     <div class="movie-info">
                         <span class="info-title">Title: </span>
                         <span>{{element.title}}</span>
-                        <span>{{element.name}}</span>
                     </div>
 
                     <div class="movie-info">
@@ -46,6 +45,32 @@
                     </div>
 
                 </div>
+
+                <div class="filtered-search-container">
+
+                    <div class="filtered-search" v-for="element in series">
+    
+                        <div class="movie-info">
+                            <span class="info-title">Title: </span>
+                            <span>{{element.name}}</span>
+                        </div>
+    
+                        <div class="movie-info">
+                            <span class="info-title">Original title: </span>
+                            <span>{{element.original_name}}</span>
+                        </div>
+    
+                        <div class="movie-info">
+                            <span class="info-title">Language: </span>
+                            <img class="flag-icon" :src="flagIcon(element)" alt="">
+                        </div>
+                        
+                        <div class="movie-info">
+                            <span class="info-title">Vote: </span>
+                            <span>{{element.vote_average}}</span>
+                        </div>
+    
+                    </div>
 
             </div>
 
