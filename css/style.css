@@ -100,7 +100,10 @@ body{
     z-index: 200;
     padding: 20px;
     background: rgb(0,0,0,0.8);
-    overflow-y: scroll;
+    overflow: auto
+}
+.filtered-search:hover .movie-info-container{
+    display: block
 }
 .golden-stars{
     color: gold
