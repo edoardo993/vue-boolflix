@@ -34,7 +34,7 @@
 // potremo generare da quella porzione di URL tante dimensioni
 // diverse. 
 
-// Milestone 4:
+// Milestone 4:      ALMOST DONE
 // 1 - Trasformiamo quello che abbiamo fatto fino ad ora in una vera
 //      e propria webapp, creando un layout completo simil-Netflix:
 //      Un header che contiene logo e search bar
@@ -64,26 +64,44 @@ new Vue({
     el: '#root',
     data: {
         userSearch: '',
+        totalContents: [],
         movies: [],
         series: []
     },
     methods: {
-        clickSearch: function(){
-            const self=this;
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=' + this.userSearch)
-            .then(function(resp){
-                self.movies=resp.data.results;
-                self.movies.forEach((element)=>{
-                    return element.vote_average=Math.ceil(element.vote_average/2)
+        searchClick: function(){
+            this.moviesSearch();
+            this.seriesSearch()
+        },
+        moviesSearch: function(){
+            if(this.userSearch===''){
+                this.movies=[],
+                this.series=[]
+            }else{
+                axios.get('https://api.themoviedb.org/3/search/movie?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=' + this.userSearch)
+                .then((resp)=>{
+                    this.movies=resp.data.results;
+                    this.totalContents=[...this.movies, ...this.totalContents];
+                    this.movies.forEach((element)=>{
+                        return element.vote_average=Math.ceil(element.vote_average/2)
+                    })
                 })
-            });
-            axios.get('https://api.themoviedb.org/3/search/tv?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=' + this.userSearch)
-            .then(function(resp){
-                self.series=resp.data.results;
-                self.series.forEach((element)=>{
-                    return element.vote_average=Math.ceil(element.vote_average/2)
+            }
+        },
+        seriesSearch: function(){
+            if(this.userSearch===''){
+                this.movies=[],
+                this.series=[]
+            }else{
+                axios.get('https://api.themoviedb.org/3/search/tv?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=' + this.userSearch)
+                .then((resp)=>{
+                    this.series=resp.data.results;
+                    this.totalContents=[...this.series, ...this.totalContents];
+                    this.series.forEach((element)=>{
+                        return element.vote_average=Math.ceil(element.vote_average/2)
+                    })
                 })
-            });
+            }
         },
         flagIcon: function(element){
             if(element.original_language==='en'){

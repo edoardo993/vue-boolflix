@@ -9,10 +9,12 @@
 body{
     background: #222;
 }
-.container{
+#root{
     width: 1200px;
     margin: 0 auto
 }
+
+/* header/search bar */
 .top-bar{
     display: flex;
     justify-content: space-between;
@@ -20,11 +22,14 @@ body{
     padding: 50px 0 50px 0
 }
 .main-title{
-    color: red;
     font-size: 25px;
     height: 70px;
     display: flex;
     align-items: center;
+}
+.main-title a{
+    text-decoration: none;
+    color: red
 }
 .search{
     text-align: center;
@@ -54,10 +59,16 @@ body{
     background: #fff;
     color: #000;
 }
+/* end header/search bar */
+
+/* container movies and series */
 .filtered-search-container{
     display: flex;
     flex-wrap: wrap
 }
+/* end container movies and series */
+
+/* container movies */
 .filtered-search{
     margin-top: 40px;
     color: #fff;
@@ -94,3 +105,4 @@ body{
 .golden-stars{
     color: gold
 }
+/* end container movies */
