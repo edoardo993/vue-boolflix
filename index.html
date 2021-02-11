@@ -11,19 +11,30 @@
 </head>
 <body>
 
-    <div class="container">
+    <div id="root" class="container">
 
-        <div id="root">
+        <header class="top-bar">
+
+            <div class="main-title">
+                <h1>BOOLFLIX</h1>
+            </div>
 
             <div class="search">
-                <input type="text" class="user-input" placeholder="Search by title" v-model="userSearch" @keyup.enter="clickSearch"><br>
+                <input type="text" class="user-input" placeholder="Search by title" v-model="userSearch" @keyup.enter="clickSearch">
                 <button class="search-button" @click="clickSearch">SEARCH</button>
             </div>
 
-            <div class="filtered-search-container">
+        </header>
 
-                <div class="filtered-search" v-for="element in movies">
+        <div class="filtered-search-container">
 
+            <div class="filtered-search" v-for="element in movies">
+
+                <div class="poster-container">
+                    <img :src="getIMG(element)" class="poster-img">
+                </div>
+
+                <div class="movie-info-container">
                     <div class="movie-info">
                         <span class="info-title">Title: </span>
                         <span>{{element.title}}</span>
@@ -42,14 +53,28 @@
                     <div class="movie-info">
                         <span class="info-title">Vote: </span>
                         <span>{{element.vote_average}}</span>
+                        <i class="fas fa-star golden-stars" v-for="stars in element.vote_average"></i>
+                        <i class="fas fa-star empty-stars" v-for="stars in (5-element.vote_average)"></i>
                     </div>
 
+                    <div class="movie-info">
+                        <span class="info-title">Overview: </span>
+                        <span>{{element.overview}}</span>
+                    </div>
                 </div>
 
-                <div class="filtered-search-container">
+            </div>
 
-                    <div class="filtered-search" v-for="element in series">
-    
+            <div class="filtered-search-container">
+
+                <div class="filtered-search" v-for="element in series">
+                    
+                    <div class="poster-container">
+                        <img :src="getIMG(element)" class="poster-img">
+                    </div>
+
+                    <div class="movie-info-container">
+
                         <div class="movie-info">
                             <span class="info-title">Title: </span>
                             <span>{{element.name}}</span>
@@ -68,9 +93,18 @@
                         <div class="movie-info">
                             <span class="info-title">Vote: </span>
                             <span>{{element.vote_average}}</span>
+                            <i class="fas fa-star golden-stars" v-for="stars in element.vote_average"></i>
+                            <i class="fas fa-star empty-stars" v-for="stars in (5-element.vote_average)"></i>
                         </div>
-    
+
+                        <div class="movie-info">
+                            <span class="info-title">Overview: </span>
+                            <span>{{element.overview}}</span>
+                        </div>
+
                     </div>
+
+                </div>
 
             </div>
 
