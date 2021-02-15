@@ -39,15 +39,15 @@
         </header>
         <!-- end header/search bar -->
 
-        <!-- title to separate movies from series -->
+        <!-- search results -->
         <div v-if="movies.length>0">
             <div class="results-movie">
                 <span>Results for: "{{userSearch}}"</span>
             </div>
         </div>
-        <!-- end title to separate movies from series -->
+        <!-- search results -->
 
-        <!-- container movies -->
+        <!-- container movies and series -->
         <div class="filtered-search-container">
 
             <div class="filtered-search" v-for="element in totalContents">
@@ -100,68 +100,7 @@
 
             </div>
         </div>
-        <!-- end container movies -->
-
-
-        <!-- container series -->
-        <!-- <div class="filtered-search-container">
-
-            <div class="filtered-search-container">
-
-                <div class="filtered-search" v-for="element in totalContents">
-                    
-                    <div class="poster-container" @mouseenter="getActors(element.id)">
-                        <img v-if="element.poster_path" :src="getIMG(element)" class="poster-img">
-                        <img v-else src="img/clapboard.png" class="poster-img">
-                    </div>
-
-                    <div class="movie-info-container">
-
-                        <div class="movie-info">
-                            <span class="info-title">Title: </span>
-                            <span>{{element.name}}{{element.title}}</span>
-                        </div>
-    
-                        <div class="movie-info">
-                            <span class="info-title">Original title: </span>
-                            <span>{{element.original_name}}</span>
-                        </div>
-    
-                        <div class="movie-info">
-                            <span class="info-title">Language: </span>
-                            <img class="flag-icon" :src="flagIcon(element)" alt="">
-                        </div>
-                        
-                        <div class="movie-info">
-                            <span class="info-title">Vote: </span>
-                            <span>{{element.vote_average}}/5</span>
-                            <i class="fas fa-star golden-stars" v-for="stars in element.vote_average"></i>
-                            <i class="fas fa-star empty-stars" v-for="stars in (5-element.vote_average)"></i>
-                        </div>
-
-                        <div class="movie-info">
-                            <span class="info-title">Actors: </span>
-                            <span>{{actors}}</span>
-                        </div>
-    
-                        <div class="movie-info">
-                            <span class="info-title">Genre: </span>
-                            <span></span>
-                        </div>
-                        
-                        <div class="movie-info" v-if="element.overview">
-                            <span class="info-title">Overview: </span>
-                            <span>{{element.overview}}</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div> -->
-        <!-- end container series -->
+        <!-- end container movies and series -->
 
     </div>
 
