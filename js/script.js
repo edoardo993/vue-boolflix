@@ -73,7 +73,9 @@ new Vue({
         genresNames: [],
         totalGenret: [],
         totalGenres: [],
-        isActive: true
+        isActive: true,
+        trendingWeek: [],
+        IDXWeek: []
     },
     mounted(){
         axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=52c28cec98a2cf64e2b1f42536f8682a`)
@@ -90,6 +92,11 @@ new Vue({
                     }
                 }
             })
+        });
+        axios.get('https://api.themoviedb.org/3/trending/all/week?api_key=52c28cec98a2cf64e2b1f42536f8682a')
+        .then((resp)=>{
+            this.trendingWeek=resp.data.results;
+            this.IDXWeek=resp.data.results[0]
         })
     },
     methods: {
@@ -168,7 +175,7 @@ new Vue({
             return `https://lipis.github.io/flag-icon-css/flags/4x3/${element.original_language}.svg`;
         },
         getIMG(element){
-            return `https://image.tmdb.org/t/p/w342${element.poster_path}`
+            return `https://image.tmdb.org/t/p/w500${element.poster_path}`
         },
         getActors(IDX){
             return axios.get(`https://api.themoviedb.org/3/movie/${IDX}/credits?api_key=52c28cec98a2cf64e2b1f42536f8682a`)

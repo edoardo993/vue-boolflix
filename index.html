@@ -15,7 +15,7 @@
 
         <!-- header/search bar -->
         <header class="top-bar">
-
+            
             <div class="main-title">
                 <ul class="left-content-list">
                     <li><a href="#"><img src="https://fontmeme.com/permalink/210210/4937b74c6317b36c509baa13669b4b20.png" class="logo"></a></li>
@@ -52,10 +52,8 @@
         <!-- end header/search bar -->
 
         <!-- search results -->
-        <div v-if="movies.length>0">
-            <div class="results-movie">
-                <span>Results for: "{{userSearch}}"</span>
-            </div>
+        <div class="results-movie" v-if="movies.length>0">
+            <span>Results for: "{{userSearch}}"</span>
         </div>
         <!-- search results -->
 
