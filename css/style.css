@@ -8,6 +8,7 @@
 }
 body{
     background: #222;
+    font-family: 'Roboto', sans-serif;
 }
 #app{
     max-width: 1400px;
@@ -24,13 +25,16 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 8px 0 8px 0; */
+    padding: 0 50px 0 50px;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 22;
-    background: rgb(0,0,0,0.5)
+    background: rgb(0,0,0,0.8)
+}
+.top-bar:hover{
+    background: rgb(0,0,0);
 }
 .main-title{
     height: 70px;
@@ -42,17 +46,39 @@ body{
     display: flex;
     align-items: center;
 }
+.search-on-click{
+    position: relative
+}
+.visible-on-click{
+    position: absolute;
+    left: 5px;
+    top: 7px;
+    margin-left: 0;
+    font-size: 16px;
+    color: #fff
+}
+.x-visible-on-click{
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    margin-left: 0;
+    font-size: 16px;
+    color: #fff
+}
+.x-visible-on-click:hover{
+    cursor: pointer;
+}
 .user-input{
-    width: 200px;
+    width: 250px;
     height: 30px;
     font-size: 15px;
-    padding: 10px;
+    padding: 10px 30px 10px 30px;
     border: 1px solid #ccc;
-    background: #222;
-    color: #ccc
+    background: #1E1D1A;
+    color: #999999
 }
 .logo{
-    width: 130px;
+    width: 110px;
     margin-right: 15px
 }
 .avatar{
@@ -62,21 +88,19 @@ body{
 }
 a{
     text-decoration: none;
-    color: #ccc
+    color: #fff
 }
 a:hover{
-    color: #fff
-}
-.right-content-list .fa-search,
-.right-content-list .fa-gift{
-    font-size: 25px;
     color: #ccc
 }
-.right-content-list .fas{
-    margin-left: 20px
-}
-.right-content-list .fas:hover{
+.right-content-list .fa-search.visible,
+.right-content-list .fa-gift,
+.right-content-list .fa-bell{
+    font-size: 22px;
     color: #fff
+}
+.right-content-list .fas .visible{
+    margin-left: 16px
 }
 .left-content-list li,
 .right-content-list li{
@@ -87,7 +111,7 @@ a:hover{
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 18px
+    font-size: 16px
 }
 ul{
     list-style-type: none;

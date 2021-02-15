@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
     <title>BOOLFLIX</title>
 </head>
 <body>
@@ -18,7 +20,10 @@
             
             <div class="main-title">
                 <ul class="left-content-list">
-                    <li><a href="#"><img src="https://fontmeme.com/permalink/210210/4937b74c6317b36c509baa13669b4b20.png" class="logo"></a></li>
+                    <li><a href="#">
+                        <img :src="logo"
+                            class="logo"></a>
+                    </li>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Serie TV</a></li>
                     <li><a href="#">Film</a></li>
@@ -29,10 +34,24 @@
 
             <div class="search">
                 <ul class="right-content-list">
-                    <li><input type="text" class="user-input" :class="{active: isActive}" placeholder="Titoli, persone, generi" v-model="userSearch" @keyup="searchClick"></li>
-                    <li @click="isActive=!isActive" :class="{active: !isActive}"><a href="#"><i class="fas fa-search"></a></i></li>
-                    <li><a href="#"><i class="fas fa-gift"></a></i></li>
-                    <li><a href="#"><i class="fas fa-bell"></a></i></li>
+                    <li :class="{active: isActive}"
+                        class="search-on-click">
+                            <input type="text"
+                                    class="user-input"
+                                    placeholder="Titoli, persone, generi"
+                                    v-model="userSearch"
+                                    @keyup="searchClick"
+                            >
+                            <i class="fas fa-search visible-on-click"></i>
+                            <i class="fas fa-times x-visible-on-click" @click="deleteClick"></i>
+                    </li>
+                    <li @click="isActive=!isActive"
+                        :class="{active: !isActive}"
+                    >
+                        <a href="#"><i class="fas fa-search visible"></a></i>
+                    </li>
+                    <li><a href="#"><i class="fas fa-gift visible"></a></i></li>
+                    <li><a href="#"><i class="fas fa-bell visible"></a></i></li>
                     <li><a href="#"><img src="img/avatar_7.jpg" class="avatar"></a></li>
                 </ul>
             </div>
@@ -62,9 +81,14 @@
 
             <div class="filtered-search" v-for="element in totalContents">
 
-                <div class="poster-container" @mouseenter="getActors(element.id)">
-                    <img v-if="element.poster_path" :src="getIMG(element)" class="poster-img">
-                    <img v-else src="img/clapboard.png" class="poster-img">
+                <div class="poster-container"
+                        @mouseenter="getActors(element.id), getGenre(element.genre_ids)">
+                    <img v-if="element.poster_path"
+                            :src="getIMG(element)"
+                            class="poster-img">
+                    <img v-else
+                            src="img/clapboard.png"
+                            class="poster-img">
                 </div>
 
                 <div class="movie-info-container">
@@ -76,8 +100,10 @@
 
                     <div class="movie-info">
                         <span class="info-title">Original title: </span>
-                        <span v-if="element.original_title">{{element.original_title}}</span>
-                        <span v-else >{{element.original_name}}</span>
+                        <span v-if="element.original_title">
+                            {{element.original_title}}
+                        </span>
+                        <span v-else>{{element.original_name}}</span>
                     </div>
 
                     <div class="movie-info">
@@ -88,8 +114,12 @@
                     <div class="movie-info">
                         <span class="info-title">Vote: </span>
                         <span>{{element.vote_average}}/5</span>
-                        <i class="fas fa-star golden-stars" v-for="stars in element.vote_average"></i>
-                        <i class="fas fa-star empty-stars" v-for="stars in (5-element.vote_average)"></i>
+                        <i class="fas fa-star golden-stars"
+                            v-for="stars in element.vote_average">
+                        </i>
+                        <i class="fas fa-star empty-stars"
+                            v-for="stars in (5-element.vote_average)">
+                        </i>
                     </div>
 
                     <div class="movie-info">
@@ -99,7 +129,7 @@
 
                     <div class="movie-info">
                         <span class="info-title">Genre: </span>
-                        <span></span>
+                        <span>{{IDXGenres}}</span>
                     </div>
 
                     <div class="movie-info" v-if="element.overview">

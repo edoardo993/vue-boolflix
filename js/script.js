@@ -71,15 +71,17 @@ new Vue({
         actors: [],
         genresCode: [],
         genresNames: [],
-        totalGenret: [],
         totalGenres: [],
         isActive: true,
-        trendingWeek: [],
-        IDXWeek: []
+        IDXGenres: [],
+        logo: 'https://fontmeme.com/permalink/210210/4937b74c6317b36c509baa13669b4b20.png'
     },
     mounted(){
-        axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=52c28cec98a2cf64e2b1f42536f8682a`)
-        .then((resp)=>{
+        axios.get(`https://api.themoviedb.org/3/genre/movie/list`,{
+            params:{
+                api_key: '52c28cec98a2cf64e2b1f42536f8682a'
+            }
+        }).then((resp)=>{
             let totalGenres=resp.data.genres;
             this.totalGenres=resp.data.genres;
             totalGenres.forEach((element)=>{
@@ -92,11 +94,6 @@ new Vue({
                     }
                 }
             })
-        });
-        axios.get('https://api.themoviedb.org/3/trending/all/week?api_key=52c28cec98a2cf64e2b1f42536f8682a')
-        .then((resp)=>{
-            this.trendingWeek=resp.data.results;
-            this.IDXWeek=resp.data.results[0]
         })
     },
     methods: {
@@ -113,8 +110,12 @@ new Vue({
                 this.series=[],
                 this.totalContents=[]
             }else{
-                axios.get(`https://api.themoviedb.org/3/search/movie?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=${this.userSearch}`)
-                .then((resp)=>{
+                axios.get(`https://api.themoviedb.org/3/search/movie`,{
+                    params:{
+                        api_key: '52c28cec98a2cf64e2b1f42536f8682a',
+                        query: this.userSearch
+                    }
+                }).then((resp)=>{
                     this.movies=resp.data.results;
                     this.totalContents=[...this.movies, ...this.totalContents];
                     this.movies.forEach((element)=>{
@@ -128,8 +129,12 @@ new Vue({
                 this.movies=[],
                 this.series=[]
             }else{
-                axios.get(`https://api.themoviedb.org/3/search/tv?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=${this.userSearch}`)
-                .then((resp)=>{
+                axios.get(`https://api.themoviedb.org/3/search/tv`,{
+                    params:{
+                        api_key: '52c28cec98a2cf64e2b1f42536f8682a',
+                        query: this.userSearch
+                    }
+                }).then((resp)=>{
                     this.series=resp.data.results;
                     this.totalContents=[...this.series, ...this.totalContents];
                     this.series.forEach((element)=>{
@@ -177,8 +182,15 @@ new Vue({
         getIMG(element){
             return `https://image.tmdb.org/t/p/w500${element.poster_path}`
         },
+        getBackground(url){
+            return `background-image:url('https://image.tmdb.org/t/p/w500${url}')`
+        },
         getActors(IDX){
-            return axios.get(`https://api.themoviedb.org/3/movie/${IDX}/credits?api_key=52c28cec98a2cf64e2b1f42536f8682a`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${IDX}/credits`,{
+                params:{
+                    api_key: '52c28cec98a2cf64e2b1f42536f8682a'
+                }
+            })
             .then((resp)=>{
                 let currentActors=[];
                 resp.data.cast.forEach((element)=>{
@@ -190,6 +202,24 @@ new Vue({
                 }
                 return this.actors=actors.toString()
             })
+        },
+        getGenre(genreIDX){
+            let currentGenre=[];
+            this.totalGenres.forEach((element)=>{
+                for(let x=0; x<genreIDX.length; x++){
+                    if(element.id===genreIDX[x]){
+                        currentGenre.push(` ${element.name}`)
+                    }
+                }
+            });
+            console.log(currentGenre)
+            return this.IDXGenres=currentGenre.toString()
+        },
+        deleteClick(){
+            this.userSearch='';
+            this.movies=[];
+            this.series=[];
+            this.totalContents=[]
         }
     }
 });
