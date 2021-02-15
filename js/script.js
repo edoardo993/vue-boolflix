@@ -72,12 +72,14 @@ new Vue({
         genresCode: [],
         genresNames: [],
         totalGenret: [],
-        totalGenres: []
+        totalGenres: [],
+        isActive: true
     },
     mounted(){
         axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=52c28cec98a2cf64e2b1f42536f8682a`)
         .then((resp)=>{
             let totalGenres=resp.data.genres;
+            this.totalGenres=resp.data.genres;
             totalGenres.forEach((element)=>{
                 if(!this.genresCode.includes(element.id)){
                     this.genresCode.push(element.id)
@@ -95,7 +97,8 @@ new Vue({
             this.moviesSearch();
             this.seriesSearch(),
             console.log(this.genresCode);
-            console.log(this.genresNames)
+            console.log(this.genresNames);
+            console.log(this.totalGenres)
         },
         moviesSearch(){
             if(this.userSearch===''){
