@@ -180,22 +180,7 @@ new Vue({
                 }
                 return this.actors=actors.toString()
             })
-        },
-        // getGenre(){
-        //     let currentGenre=[];
-        //     this.totalGenres.forEach((element)=>{
-        //         for(let x=0; x<element.genre_ids.length; x++){
-        //             for(let x=0; x<this.genresCode.length; x++){
-        //                 if(element.genres.id===this.genresCode[x]){
-        //                     currentGenre.push(element.genres.name)
-        //                 }
-        //                 genret.push(`${currentGenre}`);
-        //             }
-        //         }
-        //     });
-        //     console.log(currentGenre)
-        //     return this.totalGenret=currentGenre.toString()
-        // }
+        }
     }
 });
 Vue.config.devtools=true
