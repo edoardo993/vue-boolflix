@@ -49,21 +49,19 @@ body{
 .search-on-click{
     position: relative
 }
-.visible-on-click{
+.x-visible-on-click,
+.search-visible-on-click{
     position: absolute;
-    left: 5px;
-    top: 7px;
     margin-left: 0;
     font-size: 16px;
-    color: #fff
+    color: #fff;
+    top: 7px;
+}
+.search-visible-on-click{
+    left: 5px
 }
 .x-visible-on-click{
-    position: absolute;
     right: 7px;
-    top: 7px;
-    margin-left: 0;
-    font-size: 16px;
-    color: #fff
 }
 .x-visible-on-click:hover{
     cursor: pointer;
@@ -84,9 +82,9 @@ body{
 .avatar{
     border-radius: 7px;
     width: 35px;
-    margin-left: 15px
+    margin-left: 16px
 }
-a{
+.top-bar a{
     text-decoration: none;
     color: #fff
 }
@@ -99,7 +97,7 @@ a:hover{
     font-size: 22px;
     color: #fff
 }
-.right-content-list .fas .visible{
+.right-content-list .fas.visible{
     margin-left: 16px
 }
 .left-content-list li,
@@ -115,20 +113,6 @@ a:hover{
 }
 ul{
     list-style-type: none;
-}
-.search-button{
-    width: 150px;
-    height: 50px;
-    background: red;
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 17px
-}
-.search-button:active{
-    background: #fff;
-    color: #000;
 }
 .select{
     color: #fff;
@@ -176,13 +160,67 @@ ul{
     width: 20px;
     vertical-align: middle;
 }
+.menu{
+    color: #fff;
+    position: absolute;
+    top: 30px;
+    left: -20px;
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 2px solid #fff;
+    display: none;
+    background: rgb(0,0,0,0.8);
+    padding: 0 20px 10px 20px;
+    width: 160px
+}
+.series-hide-div,
+.movies-hide-div{
+    position: relative;
+}
+.series-hide-div:hover .menu,
+.movies-hide-div:hover .menu{
+    display: block;
+    -webkit-animation: fadein 1s;
+    -moz-animation: fadein 1s;
+    -ms-animation: fadein 1s;
+    -o-animation: fadein 1s;
+    animation: fadein 1s;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.genre-list{
+    padding-top: 7px
+}
+.fa-sort-up{
+    position: absolute;
+    top: -13px;
+    left: 30px;
+    font-size: 30px;
+}
 .poster-img,
 .filtered-search,
 .movie-info-container{
     width: 200px;
     height: 300px;
     border-radius: 7px;
-
 }
 .poster-img:hover{
     cursor: pointer

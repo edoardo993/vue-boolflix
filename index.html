@@ -17,16 +17,33 @@
 
         <!-- header/search bar -->
         <header class="top-bar">
-            
+
             <div class="main-title">
                 <ul class="left-content-list">
                     <li><a href="#">
                         <img :src="logo"
-                            class="logo"></a>
+                            class="logo"
+                            @click="deleteClick"></a>
                     </li>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Serie TV</a></li>
-                    <li><a href="#">Film</a></li>
+                    <li @click="deleteClick"><a href="#">Home</a></li>
+                    <li class="series-hide-div">
+                        <a href="#">Serie TV</a>
+                        <div class="menu">
+                            <i class="fas fa-sort-up"></i>
+                            <div class="genre-list" v-for="genre in genresNames">
+                                <div class="bottom"><a href="#">{{genre}}</a></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="movies-hide-div">
+                        <a href="#">Film</a>
+                        <div class="menu">
+                            <i class="fas fa-sort-up"></i>
+                            <div class="genre-list" v-for="genre in genresNames">
+                                <div class="bottom"><a href="#">{{genre}}</a></div>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="#">Nuovi e popolari</a></li>
                     <li><a href="#">La mia lista</a></li>
                 </ul>
@@ -42,7 +59,7 @@
                                     v-model="userSearch"
                                     @keyup="searchClick"
                             >
-                            <i class="fas fa-search visible-on-click"></i>
+                            <i class="fas fa-search search-visible-on-click"></i>
                             <i class="fas fa-times x-visible-on-click" @click="deleteClick"></i>
                     </li>
                     <li @click="isActive=!isActive"
@@ -55,17 +72,6 @@
                     <li><a href="#"><img src="img/avatar_7.jpg" class="avatar"></a></li>
                 </ul>
             </div>
-
-            <!-- select -->
-            <!-- <div class="select">
-                <h3>Filter By Genre</h3>
-                <select v-model="selected">
-                    <option disabled value="">----------</option>
-                    <option>All Genres</option>
-                    <option v-for="genre in genresNames">{{genre}}</option>
-                </select>
-            </div> -->
-            <!-- end select -->
 
         </header>
         <!-- end header/search bar -->

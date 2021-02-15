@@ -46,14 +46,14 @@
 //      appaiono le informazioni aggiuntive già prese nei punti
 //      precedenti più la overview
 
-// Milestone 5 (Opzionale):
+// Milestone 5 (Opzionale):      DONE
 // Partendo da un film o da una serie, richiedere all'API quali
 // sono gli attori che fanno parte del cast aggiungendo alla
 // nostra scheda Film / Serie SOLO i primi 5 restituiti dall’API
 // con Nome e Cognome, e i generi associati al film con questo
 // schema: “Genere 1, Genere 2, …”.
 
-// Milestone 6 (Opzionale):
+// Milestone 6 (Opzionale):      WORKIN ON IT
 // Creare una lista di generi richiedendo quelli disponibili
 // all'API e creare dei filtri con i generi tv e movie per
 // mostrare/nascondere le schede ottenute con la ricerca.
@@ -73,6 +73,8 @@ new Vue({
         genresNames: [],
         totalGenres: [],
         isActive: true,
+        trendingWeek: [],
+        IDXWeek: [],
         IDXGenres: [],
         logo: 'https://fontmeme.com/permalink/210210/4937b74c6317b36c509baa13669b4b20.png'
     },
@@ -82,9 +84,8 @@ new Vue({
                 api_key: '52c28cec98a2cf64e2b1f42536f8682a'
             }
         }).then((resp)=>{
-            let totalGenres=resp.data.genres;
             this.totalGenres=resp.data.genres;
-            totalGenres.forEach((element)=>{
+            this.totalGenres.forEach((element)=>{
                 if(!this.genresCode.includes(element.id)){
                     this.genresCode.push(element.id)
                 }
@@ -94,6 +95,15 @@ new Vue({
                     }
                 }
             })
+        });
+        axios.get('https://api.themoviedb.org/3/trending/all/week',{
+            params:{
+                api_key: '52c28cec98a2cf64e2b1f42536f8682a'
+            }
+        }).then((resp)=>{
+            this.trendingWeek=resp.data.results;
+            this.IDXWeek=resp.data.results[0];
+            console.log(this.trendingWeek)
         })
     },
     methods: {
