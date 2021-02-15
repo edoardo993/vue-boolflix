@@ -9,7 +9,7 @@
 body{
     background: #222;
 }
-#root{
+#app{
     width: 1200px;
     margin: 0 auto
 }
@@ -22,14 +22,9 @@ body{
     padding: 50px 0 50px 0
 }
 .main-title{
-    font-size: 25px;
     height: 70px;
     display: flex;
     align-items: center;
-}
-.main-title a{
-    text-decoration: none;
-    color: red
 }
 .search{
     text-align: center;
@@ -59,7 +54,27 @@ body{
     background: #fff;
     color: #000;
 }
+.select{
+    color: #fff;
+    font-size: 20px;
+}
 /* end header/search bar */
+
+/* title to separate movies from series */
+.search-title{
+    align-items: center;
+    margin-top: 40px;
+    font-size: 27px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff
+}
+.results-movie{
+    color: #fff;
+    font-size: 25px;
+}
+/* end title to separate movies from series */
 
 /* container movies and series */
 .filtered-search-container{
@@ -68,11 +83,14 @@ body{
 }
 /* end container movies and series */
 
-/* container movies */
+/* container movies and series */
 .filtered-search{
     margin-top: 40px;
     color: #fff;
     position: relative
+}
+.movie-info{
+    margin: 15px 0 15px 0
 }
 .movie-info span{
     font-size: 16px
@@ -88,7 +106,7 @@ body{
 .filtered-search,
 .movie-info-container{
     width: 300px;
-    height: 500px;
+    height: 450px;
 }
 .poster-img:hover{
     cursor: pointer
@@ -97,7 +115,6 @@ body{
     position: absolute;
     top: 0;
     display: none;
-    z-index: 200;
     padding: 20px;
     background: rgb(0,0,0,0.8);
     overflow: auto
@@ -108,4 +125,4 @@ body{
 .golden-stars{
     color: gold
 }
-/* end container movies */
+/* end container movies and series */

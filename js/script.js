@@ -61,25 +61,48 @@
 
 
 new Vue({
-    el: '#root',
+    el: '#app',
     data: {
         userSearch: '',
+        selected: '',
         totalContents: [],
         movies: [],
         series: [],
-        languages: []
+        actors: [],
+        genresCode: [],
+        genresNames: [],
+        totalGenres: []
+    },
+    mounted(){
+        axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=52c28cec98a2cf64e2b1f42536f8682a`)
+        .then((resp)=>{
+            let totalGenres=resp.data.genres;
+            totalGenres.forEach((element)=>{
+                if(!this.genresCode.includes(element.id)){
+                    this.genresCode.push(element.id)
+                }
+                for (let x=0; x<this.genresCode.length; x++){
+                    if(this.genresCode[x]===element.id){
+                        this.genresNames.push(element.name)
+                    }
+                }
+            })
+        })
     },
     methods: {
-        searchClick: function(){
+        searchClick(){
             this.moviesSearch();
-            this.seriesSearch()
+            this.seriesSearch(),
+            console.log(this.genresCode);
+            console.log(this.genresNames)
         },
-        moviesSearch: function(){
+        moviesSearch(){
             if(this.userSearch===''){
                 this.movies=[],
-                this.series=[]
+                this.series=[],
+                this.totalContents=[]
             }else{
-                axios.get('https://api.themoviedb.org/3/search/movie?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=' + this.userSearch)
+                axios.get(`https://api.themoviedb.org/3/search/movie?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=${this.userSearch}`)
                 .then((resp)=>{
                     this.movies=resp.data.results;
                     this.totalContents=[...this.movies, ...this.totalContents];
@@ -89,12 +112,12 @@ new Vue({
                 })
             }
         },
-        seriesSearch: function(){
+        seriesSearch(){
             if(this.userSearch===''){
                 this.movies=[],
                 this.series=[]
             }else{
-                axios.get('https://api.themoviedb.org/3/search/tv?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=' + this.userSearch)
+                axios.get(`https://api.themoviedb.org/3/search/tv?api_key=52c28cec98a2cf64e2b1f42536f8682a&query=${this.userSearch}`)
                 .then((resp)=>{
                     this.series=resp.data.results;
                     this.totalContents=[...this.series, ...this.totalContents];
@@ -104,7 +127,7 @@ new Vue({
                 })
             }
         },
-        flagIcon: function(element){
+        flagIcon(element){
             if(element.original_language==='en'){
                 element.original_language='gb'
             }
@@ -117,16 +140,45 @@ new Vue({
             if(element.original_language==='hi'){
                 element.original_language='in'
             }
+            if(element.original_language==='cs'){
+                element.original_language='cz'
+            }
+            if(element.original_language==='ko'){
+                element.original_language='kr'
+            }
+            if(element.original_language==='fa'){
+                element.original_language='ir'
+            }
+            if(element.original_language==='ta'){
+                element.original_language='th'
+            }
+            if(element.original_language==='zh'){
+                element.original_language='cn'
+            }
+            if(element.original_language==='nb'){
+                element.original_language='nl'
+            }
             if(element.original_language==='xx'){
                 return ''
             }
-            return 'https://lipis.github.io/flag-icon-css/flags/4x3/'+ element.original_language +'.svg';
+            return `https://lipis.github.io/flag-icon-css/flags/4x3/${element.original_language}.svg`;
         },
-        getIMG: function(element){
-            if(element.poster_path===null){
-                return 'img/clapboard.png'
-            }
-            return ('https://image.tmdb.org/t/p/w342' + element.poster_path)
+        getIMG(element){
+            return `https://image.tmdb.org/t/p/w342${element.poster_path}`
+        },
+        getActors(IDX){
+            return axios.get(`https://api.themoviedb.org/3/movie/${IDX}/credits?api_key=52c28cec98a2cf64e2b1f42536f8682a`)
+            .then((resp)=>{
+                let currentActors=[];
+                resp.data.cast.forEach((element)=>{
+                    currentActors.push(element.name)
+                });
+                let actors=[];
+                for(let x=0; x<5; x++){
+                    actors.push(` ${currentActors[x]}`)
+                }
+                return this.actors=actors.toString()
+            })
         }
     }
 });

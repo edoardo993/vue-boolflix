@@ -11,13 +11,13 @@
 </head>
 <body>
 
-    <div id="root">
+    <div id="app">
 
         <!-- header/search bar -->
         <header class="top-bar">
 
             <div class="main-title">
-                <h1><a href="#">BOOLFLIX</a></h1>
+                <a href="#"><img src="https://fontmeme.com/permalink/210210/4937b74c6317b36c509baa13669b4b20.png" alt=""></a>
             </div>
 
             <div class="search">
@@ -25,28 +25,49 @@
                 <button class="search-button" @click="searchClick">SEARCH</button>
             </div>
 
+            <!-- select -->
+            <!-- <div class="select">
+                <h3>Filter By Genre</h3>
+                <select v-model="selected">
+                    <option disabled value="">----------</option>
+                    <option>All Genres</option>
+                    <option v-for="genre in genresNames">{{genre}}</option>
+                </select>
+            </div> -->
+            <!-- end select -->
+
         </header>
         <!-- end header/search bar -->
 
-        <!-- container movies and series -->
+        <!-- title to separate movies from series -->
+        <div v-if="movies.length>0">
+            <div class="results-movie">
+                <span>Results for: "{{userSearch}}"</span>
+            </div>
+        </div>
+        <!-- end title to separate movies from series -->
+
+        <!-- container movies -->
         <div class="filtered-search-container">
 
-            <!-- container movies -->
-            <div class="filtered-search" v-for="element in movies">
+            <div class="filtered-search" v-for="element in totalContents">
 
-                <div class="poster-container">
-                    <img :src="getIMG(element)" class="poster-img">
+                <div class="poster-container" @mouseenter="getActors(element.id)">
+                    <img v-if="element.poster_path" :src="getIMG(element)" class="poster-img">
+                    <img v-else src="img/clapboard.png" class="poster-img">
                 </div>
 
                 <div class="movie-info-container">
                     <div class="movie-info">
                         <span class="info-title">Title: </span>
-                        <span>{{element.title}}</span>
+                        <span v-if="element.title">{{element.title}}</span>
+                        <span v-else>{{element.name}}</span>
                     </div>
 
                     <div class="movie-info">
                         <span class="info-title">Original title: </span>
-                        <span>{{element.original_title}}</span>
+                        <span v-if="element.original_title">{{element.original_title}}</span>
+                        <span v-else >{{element.original_name}}</span>
                     </div>
 
                     <div class="movie-info">
@@ -56,34 +77,49 @@
                     
                     <div class="movie-info">
                         <span class="info-title">Vote: </span>
-                        <span>{{element.vote_average}}</span>
+                        <span>{{element.vote_average}}/5</span>
                         <i class="fas fa-star golden-stars" v-for="stars in element.vote_average"></i>
                         <i class="fas fa-star empty-stars" v-for="stars in (5-element.vote_average)"></i>
                     </div>
 
                     <div class="movie-info">
+                        <span class="info-title">Actors: </span>
+                        <span>{{actors}}</span>
+                    </div>
+
+                    <div class="movie-info">
+                        <span class="info-title">Genre: </span>
+                        <span></span>
+                    </div>
+
+                    <div class="movie-info" v-if="element.overview">
                         <span class="info-title">Overview: </span>
                         <span>{{element.overview}}</span>
                     </div>
                 </div>
 
             </div>
-            <!-- end container movies -->
+        </div>
+        <!-- end container movies -->
 
-            <!-- container series -->
+
+        <!-- container series -->
+        <!-- <div class="filtered-search-container">
+
             <div class="filtered-search-container">
 
-                <div class="filtered-search" v-for="element in series">
+                <div class="filtered-search" v-for="element in totalContents">
                     
-                    <div class="poster-container">
-                        <img :src="getIMG(element)" class="poster-img">
+                    <div class="poster-container" @mouseenter="getActors(element.id)">
+                        <img v-if="element.poster_path" :src="getIMG(element)" class="poster-img">
+                        <img v-else src="img/clapboard.png" class="poster-img">
                     </div>
 
                     <div class="movie-info-container">
 
                         <div class="movie-info">
                             <span class="info-title">Title: </span>
-                            <span>{{element.name}}</span>
+                            <span>{{element.name}}{{element.title}}</span>
                         </div>
     
                         <div class="movie-info">
@@ -98,12 +134,22 @@
                         
                         <div class="movie-info">
                             <span class="info-title">Vote: </span>
-                            <span>{{element.vote_average}}</span>
+                            <span>{{element.vote_average}}/5</span>
                             <i class="fas fa-star golden-stars" v-for="stars in element.vote_average"></i>
                             <i class="fas fa-star empty-stars" v-for="stars in (5-element.vote_average)"></i>
                         </div>
 
                         <div class="movie-info">
+                            <span class="info-title">Actors: </span>
+                            <span>{{actors}}</span>
+                        </div>
+    
+                        <div class="movie-info">
+                            <span class="info-title">Genre: </span>
+                            <span></span>
+                        </div>
+                        
+                        <div class="movie-info" v-if="element.overview">
                             <span class="info-title">Overview: </span>
                             <span>{{element.overview}}</span>
                         </div>
@@ -113,10 +159,9 @@
                 </div>
 
             </div>
-            <!-- end container series -->
 
-        </div>
-        <!-- end container movies and series -->
+        </div> -->
+        <!-- end container series -->
 
     </div>
 
